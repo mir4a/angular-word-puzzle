@@ -85,7 +85,7 @@
         <div class="row">
             <div class="col-md-7">
 
-                <input type="text" class="form-control input-lg" placeholder="Type a char here" ng-model="game.guessLetter" ng-minlength="1" ng-maxlength="1" maxlength="1"
+                <input type="text" class="form-control input-lg" ng-hide="game.turnOffGuess" placeholder="Type a char here" ng-model="game.guessLetter" ng-minlength="1" ng-maxlength="1" maxlength="1"
                        ng-keyup="game.setGuessLetter($event)" ng-focus="game.resetGuessInput()"/>
 
             </div>

@@ -42,8 +42,8 @@ angular.module('app').controller('GameController', ['$scope', function ($scope, 
   self.guessLetter = '';
   self.enteredLetters = [];
   self.enteredKeyCodes = [];
-
-  self.attempts = 0;
+  self.turnOffGuess = false;
+  self.attempts = 1;
 
   self.setGuessLetter = function (event) {
     var keyCode = event.keyCode;
@@ -78,6 +78,8 @@ angular.module('app').controller('GameController', ['$scope', function ($scope, 
   self.checkLetter = function (letter) {
     var patt = new RegExp(letter, 'g');
 
+    self.attempts--;
+
     while ((match = patt.exec(selectedWord)) != null) {
       console.log('match.index = ' + match.index);
       self.currentWord = self.spliceSlice(self.currentWord, match.index, 1, letter);
@@ -87,7 +89,17 @@ angular.module('app').controller('GameController', ['$scope', function ($scope, 
   };
 
   self.endGame = function () {
-    self.giveUp = true;
+    if (self.currentWord === selectedWord) {
+      console.log('You Won!');
+    } else {
+      console.log('You Lose!');
+    }
+
+    self.turnOffGuess = true;
+  };
+
+  self.looseGame = function () {
+    self.finalMessage = 'You Lose!';
   };
 
   console.log(MainController);
@@ -97,5 +109,12 @@ angular.module('app').controller('GameController', ['$scope', function ($scope, 
       self.startTheGame();
     }
   }, true);
+
+  $scope.$watch('game.attempts', function (newValue, oldValue) {
+    console.log(newValue);
+    if (newValue <= 0) {
+      self.endGame();
+    }
+  });
 
 }]);
