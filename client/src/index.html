@@ -17,10 +17,10 @@
 <div class="container" ng-controller="MainController as main">
 
     <h1 class="page-header">Welcome to Word Puzzle Game!
-        <small>The game where you guess the hidden word.</small>
+        <small>The game where you guess a hidden word.</small>
     </h1>
 
-    <div class="row">
+    <div class="row" ng-hide="main.hideWelcome">
         <div class="col-md-8">
 
 
@@ -50,8 +50,30 @@
 
         <div class="col-md-4">
             <div class="well-lg text-center">
-                <a class="btn btn-lg btn-success" href="#start">Start the Game!</a>
+                <a class="btn btn-lg btn-success" href="#start" ng-click="main.startGame(true)">Start the Game!</a>
             </div>
+        </div>
+
+    </div>
+
+
+    <div class="row" ng-show="main.showGame" ng-controller="GameController as game">
+
+        <div class="col-md-7">
+            <div class="well well-lg text-center text-capitalize text-success">
+                <h1 class="result">{{ game.currentWord }}</h1>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="stats text-right">
+                <small><ng-pluralize count="game.attempts" when="{'0': 'No attempts are left', 'one': 'You have only 1 attempt', 'other': 'You have {} attempts left' }"></ng-pluralize></small>
+                <br/>
+                <small ng-repeat="letter in game.enteredLetters">{{letter}} </small>
+            </div>
+
+            <input type="text" ng-model="game.guessLetter" ng-minlength="1" ng-maxlength="1" maxlength="1" ng-keyup="game.setGuessLetter($event)" ng-focus="game.resetGuessInput()" />
+
+            <a class="btn btn-danger btn-sm pull-right" href="#giveup" ng-click="game.endGame()">Give Up</a>
         </div>
 
     </div>
