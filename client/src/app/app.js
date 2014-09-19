@@ -53,6 +53,7 @@ angular.module('app').controller('GameController', ['$scope', function ($scope, 
       console.log(asciiLetters[keyCode]);
       self.enteredLetters.push(self.guessLetter);
       self.enteredKeyCodes.push(keyCode);
+      self.checkLetter(self.guessLetter);
     }
 
     event.target.blur();
@@ -68,6 +69,21 @@ angular.module('app').controller('GameController', ['$scope', function ($scope, 
       self.currentWord += '*';
     }
     return self.currentWord;
+  };
+
+  self.spliceSlice = function(str, index, count, add) {
+    return str.slice(0, index) + add + str.slice(index + count);
+  };
+
+  self.checkLetter = function (letter) {
+    var patt = new RegExp(letter, 'g');
+
+    while ((match = patt.exec(selectedWord)) != null) {
+      console.log('match.index = ' + match.index);
+      self.currentWord = self.spliceSlice(self.currentWord, match.index, 1, letter);
+    }
+
+
   };
 
   self.endGame = function () {
