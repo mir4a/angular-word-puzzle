@@ -42,7 +42,8 @@ angular.module('app').controller('GameController', ['$scope', function ($scope, 
   self.guessLetter = '';
   self.enteredLetters = [];
   self.enteredKeyCodes = [];
-  self.turnOffGuess = false;
+  self.gameOver = false;
+  self.win = false;
   self.attempts = 1;
 
   self.setGuessLetter = function (event) {
@@ -97,19 +98,19 @@ angular.module('app').controller('GameController', ['$scope', function ($scope, 
 
   self.endGame = function () {
     if (self.checkWord(self.currentWord)) {
-      console.log('You Won!');
+      self.finalMessage = 'You Won!';
+      self.win = true;
     } else {
-      console.log('You Lose!');
+      self.finalMessage = 'You Lose!';
     }
-
-    self.turnOffGuess = true;
+    self.guessWord = selectedWord;
+    self.gameOver = true;
   };
 
   self.looseGame = function () {
     self.finalMessage = 'You Lose!';
   };
 
-  console.log(MainController);
 
   $scope.$watch('main.showGame', function (newValue, oldValue) {
     if (newValue !== oldValue) {
@@ -118,7 +119,6 @@ angular.module('app').controller('GameController', ['$scope', function ($scope, 
   }, true);
 
   $scope.$watch('game.attempts', function (newValue, oldValue) {
-    console.log(newValue);
     if (newValue <= 0) {
       self.endGame();
     }
