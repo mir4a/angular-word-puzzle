@@ -1,0 +1,27 @@
+{
+  "name": "angular-word-puzzle",
+  "version": "0.0.0",
+  "authors": [
+    "Miroslav Martynov <marty.mircha@gmail.com>"
+  ],
+  "description": "Example of word puzzle game using angular js workflow.",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.25",
+    "bootstrap": "~3.2.0",
+    "jasmine": "~2.0.4"
+  }
+}
