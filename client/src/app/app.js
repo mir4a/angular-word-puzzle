@@ -85,11 +85,18 @@ angular.module('app').controller('GameController', ['$scope', function ($scope, 
       self.currentWord = self.spliceSlice(self.currentWord, match.index, 1, letter);
     }
 
+    if (self.checkWord(self.currentWord)) {
+      self.endGame();
+    }
 
   };
 
+  self.checkWord = function(word) {
+    return word === selectedWord;
+  };
+
   self.endGame = function () {
-    if (self.currentWord === selectedWord) {
+    if (self.checkWord(self.currentWord)) {
       console.log('You Won!');
     } else {
       console.log('You Lose!');
