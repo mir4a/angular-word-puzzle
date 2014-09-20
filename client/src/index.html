@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Word Puzzle Game</title>
     <link rel="stylesheet" href="../vendor/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="<%= grunt.config.get('pkg.name') %>.css"/>
 </head>
 <body>
 <header class="navbar">
@@ -101,6 +102,6 @@
 
 </div>
 <script src="../vendor/angular/angular.min.js"></script>
-<script src="app/app.js"></script>
+<script src="<%= grunt.config.get('pkg.name') %>.js"></script>
 </body>
 </html>
